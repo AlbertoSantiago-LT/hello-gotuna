@@ -1,0 +1,8 @@
+version: '3'
+services:
+  testgo:
+    build: .
+#image es el nombre que le vamos a dar a la imagen el docker de debian lo saca del Dockerfile
+    image: testgo:slim
+    ports:
+      - "8888:8888"
