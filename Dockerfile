@@ -1,6 +1,9 @@
-FROM golang:latest
-RUN apt-get update
-WORKDIR /go/src/app
+FROM golang:bullseye AS builder
+WORKDIR /opt/gotuna
 COPY . .
-CMD go run examples/fullapp/cmd/main.go
+RUN ["go","build","examples/fullapp/cmd/main.go"]
 
+FROM debian:11.6 AS runtime
+WORKDIR /opt/gotuna
+COPY --from=builder /opt/gotuna/main .
+CMD ["./main"]
