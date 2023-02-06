@@ -4,6 +4,10 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'docker-compose build'
+		options {
+			timeout(time: 1, unit: 'HOURS')
+			timestamp()			
+	}
             }
         }
         stage('Deploy') {
